@@ -3,7 +3,9 @@
 //  Treble
 //
 //  Created by Andy Liang on 2016-02-05.
-//  Copyright © 2016 Andy Liang. All rights reserved.
+//  Copyright © 2016 Andy Liang. All Rights Reserved. MIT License.
+//
+//  Modified by Chris Eugene Mills for the Vancouver Art Gallery, April 2018
 //
 
 import UIKit
