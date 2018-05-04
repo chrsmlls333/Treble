@@ -24,7 +24,6 @@
 		A129346C1C657282008664BA /* TrackItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackItemCell.swift; sourceTree = "<group>"; };
 		A1430F671D161594006FC070 /* TrackListPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackListPresentationController.swift; sourceTree = "<group>"; };
 		A16270D01D37968A008EB2F7 /* MarqueeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarqueeLabel.swift; sourceTree = "<group>"; };
-		A16270D21D3796EB008EB2F7 /* Treble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Treble.entitlements; sourceTree = "<group>"; };
 		A1A1A1591C651F41004EE091 /* TrackListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
 		A1A57FA91C670396003D59E0 /* UIView.Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.Constraints.swift; sourceTree = "<group>"; };
 		A1D183ED1C645F780017DDE0 /* Treble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Treble.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,7 +48,6 @@
 		A12934741C6592FE008664BA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A16270D21D3796EB008EB2F7 /* Treble.entitlements */,
 				A1D183F91C645F780017DDE0 /* LaunchScreen.storyboard */,
 				A1D183F71C645F780017DDE0 /* Assets.xcassets */,
 				A1D183FC1C645F780017DDE0 /* Info.plist */,
@@ -296,7 +294,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Treble/Treble.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Treble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -313,7 +310,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Treble/Treble.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Treble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

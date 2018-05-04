@@ -41,7 +41,6 @@ class ViewController: UIViewController {
     private let nextTrackButton = UIButton(type: .custom)
     private let prevTrackButton = UIButton(type: .custom)
     private let musPickerButton = UIButton(type: .custom)
-    private let icloudDocButton = UIButton(type: .custom)
     private let trackListButton = UIButton(type: .custom)
     
     fileprivate let musicPlayer = MPMusicPlayerController.systemMusicPlayer
@@ -116,7 +115,6 @@ class ViewController: UIViewController {
         vibrancyEffectView.contentView.addSubview(prevTrackButton)
         vibrancyEffectView.contentView.addSubview(nextTrackButton)
         vibrancyEffectView.contentView.addSubview(trackListButton)
-        vibrancyEffectView.contentView.addSubview(icloudDocButton)
         
         let views: [UIView] = [containerView, backgroundImageView, backgroundView, vibrancyEffectView, imageOuterView, imageInnerView, musPickerButton, volumeSlider, songTitleLabel, albumTitleLabel, playPauseButton, prevTrackButton, nextTrackButton, trackListButton, icloudDocButton]
             
@@ -177,7 +175,6 @@ class ViewController: UIViewController {
         
         musPickerButton.constrainSize(to: 36)
         trackListButton.constrainSize(to: 36)
-        icloudDocButton.constrainSize(to: 36)
         playPauseButton.constrainSize(to: buttonSize)
         prevTrackButton.constrainSize(to: buttonSize)
         nextTrackButton.constrainSize(to: buttonSize)
@@ -186,8 +183,6 @@ class ViewController: UIViewController {
                                     imageInnerView.height <= imageOuterView.height,
                                     musPickerButton.bottom == volumeSlider.top - 16,
                                     musPickerButton.left == volumeSlider.left,
-                                    icloudDocButton.top == musPickerButton.top,
-                                    icloudDocButton.centerX == albumTitleLabel.centerX,
                                     trackListButton.top == musPickerButton.top,
                                     trackListButton.right == volumeSlider.right,
                                     songTitleLabel.bottom == albumTitleLabel.top - 16,
@@ -223,8 +218,6 @@ class ViewController: UIViewController {
         trackListButton.setBackgroundImage(#imageLiteral(resourceName: "List"), for: .normal)
         trackListButton.addTarget(self, action: #selector(ViewController.presentMusicQueueList), for: .touchUpInside)
         
-        icloudDocButton.setBackgroundImage(#imageLiteral(resourceName: "Cloud"), for: .normal)
-        icloudDocButton.addTarget(self, action: #selector(ViewController.presentCloudDocPicker), for: .touchUpInside)
         
         songTitleLabel.text = "Welcome to Treble"
         songTitleLabel.type = .continuous
@@ -475,14 +468,10 @@ class ViewController: UIViewController {
         let musicPickerViewController = MPMediaPickerController(mediaTypes: .anyAudio)
         musicPickerViewController.delegate = self
         musicPickerViewController.allowsPickingMultipleItems = true
-        musicPickerViewController.showsCloudItems = true
+        musicPickerViewController.showsCloudItems = false //true
         self.present(musicPickerViewController, animated: true, completion: nil)
     }
     
-    @objc func presentCloudDocPicker() {
-        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.audio"], in: .import)
-        documentPicker.delegate = self
-        self.present(documentPicker, animated: true, completion: nil)
     }
 
 }
