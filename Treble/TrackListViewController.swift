@@ -15,19 +15,35 @@ private let reuseIdentifier = "reuseIdentifier"
 class TrackListViewController: UITableViewController {
     
     private let musicPlayer = MPMusicPlayerController.systemMusicPlayer
-    private(set) var trackList: [MPMediaItem] = []
     
+    private(set) var trackList: [MPMediaItem] = [] {
+        didSet {
+            self.tableView.reloadData()
+//            self.updatePreferredContentSize()
+        }
+    }
     var currentTrack: MPMediaItem! {
         didSet {
-            defer {
-                self.tableView.reloadData()
-            }
-            self.title = currentTrack?.albumTitle
-            self.trackList = []
-            guard let album = currentTrack?.albumTitle else { return }
-            let predicate = MPMediaPropertyPredicate(value: album, forProperty: MPMediaItemPropertyAlbumTitle)
-            self.trackList = MPMediaQuery(filterPredicates: [predicate]).items!
+            self.tableView.reloadData()
+//            self.updatePreferredContentSize()
         }
+    }
+    var indexOfNowPlayingItem: Int {
+        guard let title = musicPlayer.nowPlayingItem?.title else { return -1 }
+        return self.trackList.map { $0.title! }.index(of: title) ?? -1
+    }
+    
+    
+    // FUNCTIONS ///////////////////////////////////////////////////////////////
+    
+    func setQueue(with: MPMediaItemCollection) {
+        if with.count == 0 {return}
+        trackList = with.items;
+        self.title = "Playlist"
+    }
+    
+    func isQueueEmpty() -> Bool {
+        return trackList.count == 0;
     }
     
     override func loadView() {
@@ -69,18 +85,17 @@ class TrackListViewController: UITableViewController {
         return 1
     }
     
-    var indexOfNowPlayingItem: Int {
-        guard let title = musicPlayer.nowPlayingItem?.title else { return -1 }
-        return self.trackList.map { $0.title! }.index(of: title) ?? -1
-    }
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         defer { self.dismiss(animated: true, completion: self.musicPlayer.play) }
         guard indexPath.row != self.indexOfNowPlayingItem else { return }
         let selectedTrack = trackList[indexPath.row]
-        musicPlayer.setQueue(with: MPMediaItemCollection(items: trackList))
+        self.musicPlayer.stop()
+        self.musicPlayer.setQueue(with: MPMediaItemCollection(items: trackList))
         self.musicPlayer.nowPlayingItem = selectedTrack
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
