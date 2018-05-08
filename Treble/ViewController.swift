@@ -56,7 +56,7 @@ class ViewController: UIViewController {
                     try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
                     try AVAudioSession.sharedInstance().setActive(true)
                     UIApplication.shared.beginReceivingRemoteControlEvents()
-                    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.restartPlayback), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+                    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.restartFilePlayback), name: .AVPlayerItemDidPlayToEndTime, object: nil)
                 case .library:
                     self.audioPlayer?.pause()
                     try AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
@@ -289,12 +289,6 @@ class ViewController: UIViewController {
         
     }
     
-    @objc func restartPlayback() {
-        guard let _ = audioPlayer.currentItem else { return }
-        audioPlayer.seek(to: kCMTimeZero)
-        audioPlayer.play()
-    }
-    
     @objc func updateCurrentTrack() {
         switch musicType {
         case .file:
@@ -450,6 +444,12 @@ class ViewController: UIViewController {
             self.updateCurrentTrack()
         }
         
+    }
+    
+    @objc func restartFilePlayback() {
+        guard let _ = audioPlayer.currentItem else { return }
+        audioPlayer.seek(to: kCMTimeZero)
+        audioPlayer.play()
     }
     
     @objc func presentMusicQueueList() {
