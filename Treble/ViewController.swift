@@ -455,11 +455,14 @@ class ViewController: UIViewController {
     @objc func presentMusicQueueList() {
         guard let _ = trackListView.currentTrack, !trackListView.trackList.isEmpty else { return }
         let viewController = UINavigationController(rootViewController: trackListView)
-        viewController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .pad ? .popover : .custom
+        viewController.modalPresentationStyle = .popover //UIDevice.current.userInterfaceIdiom == .pad ? .popover : .custom
         viewController.popoverPresentationController?.backgroundColor = .clear
-        viewController.popoverPresentationController?.sourceView = trackListButton
-        viewController.popoverPresentationController?.sourceRect = CGRect(x: 0, y: trackListButton.frame.height/2, width: 0, height: 0)
-        viewController.popoverPresentationController?.permittedArrowDirections = .any
+        viewController.popoverPresentationController?.sourceView = imageInnerView //used to be trackListButton
+        viewController.popoverPresentationController?.sourceRect = CGRect(x: imageInnerView.bounds.midX, y: imageInnerView.bounds.midY+7, width: 0, height: 0) // 5 mystery pixels for arrow offset?
+        viewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0) //center on source
+
+        viewController.preferredContentSize = CGSize(width: imageInnerView.bounds.width, height: imageInnerView.bounds.height-44) // match to imageInnerView, 40 mystery pixels
+//        viewController.setNavigationBarHidden(true, animated: false)
         viewController.transitioningDelegate = trackListView
         self.present(viewController, animated: true, completion: nil)
     }

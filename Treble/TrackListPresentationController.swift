@@ -32,7 +32,7 @@ class TrackListPresentationController: UIPresentationController {
         
         containerView!.insertSubview(dimmingView, at: 0)
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { context in
-            self.dimmingView.alpha = 0.4
+            self.dimmingView.alpha = 1
             }, completion: nil)
     }
     
