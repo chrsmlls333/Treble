@@ -496,30 +496,4 @@ extension ViewController: MPMediaPickerControllerDelegate {
     
 }
 
-extension ViewController: UIDocumentPickerDelegate {
 
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        controller.dismiss(animated: true, completion: nil)
-    }
-    
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        guard controller.documentPickerMode == .import else { return }
-        let audioItem = AVPlayerItem(url: UIDocument(fileURL: url).presentedItemURL!)
-        let url = url.deletingPathExtension()
-        let fullName = url.lastPathComponent
-        if fullName.components(separatedBy: "-").count == 2 {
-            let components = fullName.components(separatedBy: "-")
-            audioArtistName = components[0]
-            audioFileName = components[1]
-        } else {
-            audioFileName = fullName
-        }
-        
-        self.musicType = .file
-        self.audioPlayer = AVPlayer(playerItem: audioItem)
-        self.audioPlayer.play()
-        
-        self.updateCurrentTrack()
-    }
-    
-}
